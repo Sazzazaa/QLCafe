@@ -110,21 +110,21 @@ namespace CafeManagement.DAL
         }
         public List<object> GetOrdersLight()
         {
-            using (var db = new Cafe())
+            using (var db = new Cafe()) // Thay "CafeDbContext" bằng tên DbContext của bạn
             {
-                // Chỉ select các cột cần
-                var data = db.Orders
-                             .Select(o => new
-                             {
-                                 o.OrderID,
-                                 o.DateCheckIn,
-                                 o.DateCheckOut,
-                                 o.Status,
-                                 o.TableID
-                             })
-                             .ToList();
+                var data = (from o in db.Orders
+                            join t in db.CF_Table
+                            on o.TableID equals t.TableID
+                            select new
+                            {
+                                o.OrderID,
+                                o.DateCheckIn,
+                                o.DateCheckOut,
+                                o.Status,
+                                o.TableID,
+                                t.TableName
+                            }).ToList();
 
-                // Vì đang return anonymous type => ta ép sang List<object> hoặc List<dynamic> 
                 return data.Cast<object>().ToList();
             }
         }

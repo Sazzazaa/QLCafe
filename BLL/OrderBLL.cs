@@ -48,6 +48,5 @@ namespace CafeManagement.BLL
             return orderDAL.SearchOrdersByDateLight(fromDate, toDate);
         }
 
-
     }
 }

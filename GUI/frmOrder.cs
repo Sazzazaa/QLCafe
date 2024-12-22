@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using BLL;
 using CafeManagement.BLL;
 using DAL.Models;
 
@@ -9,6 +10,8 @@ namespace CafeManagement.GUI
     public partial class frmOrder : Form
     {
         private OrderBLL orderBLL = new OrderBLL();
+        private TableBLL tableBLL = new TableBLL();
+
 
         public frmOrder()
         {
@@ -17,7 +20,17 @@ namespace CafeManagement.GUI
 
         private void frmOrder_Load(object sender, EventArgs e)
         {
+            cbbStatus.Items.Add("Chưa thanh toán");
+            cbbStatus.Items.Add("Đã thanh toán");
             LoadOrdersToGrid();
+            LoadTablesToComboBox();
+        }
+        private void LoadTablesToComboBox()
+        {
+            var list = tableBLL.GetAllTables();
+            cbbTableID.DataSource = list;
+            cbbTableID.DisplayMember = "TableName";
+            cbbTableID.ValueMember = "TableID";
         }
 
         private void LoadOrdersToGrid()
@@ -35,10 +48,15 @@ namespace CafeManagement.GUI
                 txtOrderID.Text = selectedRow.Cells["OrderID"].Value?.ToString();
 
                 // Status
-                txtStatus.Text = selectedRow.Cells["Status"].Value?.ToString();
+                cbbStatus.Text = selectedRow.Cells["Status"].Value?.ToString();
 
                 // TableID
-                txtTableID.Text = selectedRow.Cells["TableID"].Value?.ToString();
+                var tableIdValue = selectedRow.Cells["TableID"].Value;
+                if (tableIdValue != null)
+                {
+                    // Gán lại cho ComboBox => ComboBox sẽ hiện "Bàn 1" hay "Bàn 2"
+                    cbbTableID.SelectedValue = tableIdValue.ToString();
+                }
 
                 // DateCheckIn
                 var dateCheckInValue = selectedRow.Cells["DateCheckIn"].Value;
@@ -70,8 +88,8 @@ namespace CafeManagement.GUI
                 {
                     DateCheckIn = dtpDateCheckIn.Value,
                     DateCheckOut = dtpDateCheckOut.Value,
-                    Status = txtStatus.Text,
-                    TableID = txtTableID.Text
+                    Status = cbbStatus.Text,
+                    TableID = cbbTableID.SelectedValue.ToString()
                 };
 
                 bool result = orderBLL.InsertOrder(newOrder);
@@ -108,8 +126,8 @@ namespace CafeManagement.GUI
                     OrderID = orderId,
                     DateCheckIn = dtpDateCheckIn.Value,
                     DateCheckOut = dtpDateCheckOut.Value,
-                    Status = txtStatus.Text,
-                    TableID = txtTableID.Text
+                    Status = cbbStatus.Text,
+                    TableID = cbbTableID.SelectedValue.ToString()
                 };
 
                 bool result = orderBLL.UpdateOrder(updateOrder);

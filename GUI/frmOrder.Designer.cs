@@ -20,8 +20,6 @@
         {
             this.dgvOrders = new System.Windows.Forms.DataGridView();
             this.txtOrderID = new System.Windows.Forms.TextBox();
-            this.txtStatus = new System.Windows.Forms.TextBox();
-            this.txtTableID = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -37,11 +35,14 @@
             this.lblDateCheckOut = new System.Windows.Forms.Label();
             this.dtpDateCheckIn = new System.Windows.Forms.DateTimePicker();
             this.dtpDateCheckOut = new System.Windows.Forms.DateTimePicker();
+            this.cbbStatus = new System.Windows.Forms.ComboBox();
+            this.cbbTableID = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvOrders
             // 
+            this.dgvOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOrders.Location = new System.Drawing.Point(12, 230);
             this.dgvOrders.Name = "dgvOrders";
@@ -56,20 +57,6 @@
             this.txtOrderID.ReadOnly = true;
             this.txtOrderID.Size = new System.Drawing.Size(150, 20);
             this.txtOrderID.TabIndex = 1;
-            // 
-            // txtStatus
-            // 
-            this.txtStatus.Location = new System.Drawing.Point(105, 66);
-            this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Size = new System.Drawing.Size(150, 20);
-            this.txtStatus.TabIndex = 2;
-            // 
-            // txtTableID
-            // 
-            this.txtTableID.Location = new System.Drawing.Point(105, 92);
-            this.txtTableID.Name = "txtTableID";
-            this.txtTableID.Size = new System.Drawing.Size(150, 20);
-            this.txtTableID.TabIndex = 3;
             // 
             // btnAdd
             // 
@@ -210,9 +197,27 @@
             this.dtpDateCheckOut.Size = new System.Drawing.Size(150, 20);
             this.dtpDateCheckOut.TabIndex = 18;
             // 
+            // cbbStatus
+            // 
+            this.cbbStatus.FormattingEnabled = true;
+            this.cbbStatus.Location = new System.Drawing.Point(105, 66);
+            this.cbbStatus.Name = "cbbStatus";
+            this.cbbStatus.Size = new System.Drawing.Size(121, 21);
+            this.cbbStatus.TabIndex = 19;
+            // 
+            // cbbTableID
+            // 
+            this.cbbTableID.FormattingEnabled = true;
+            this.cbbTableID.Location = new System.Drawing.Point(105, 92);
+            this.cbbTableID.Name = "cbbTableID";
+            this.cbbTableID.Size = new System.Drawing.Size(121, 21);
+            this.cbbTableID.TabIndex = 20;
+            // 
             // frmOrder
             // 
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cbbTableID);
+            this.Controls.Add(this.cbbStatus);
             this.Controls.Add(this.dtpDateCheckOut);
             this.Controls.Add(this.dtpDateCheckIn);
             this.Controls.Add(this.lblDateCheckOut);
@@ -228,8 +233,6 @@
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.txtTableID);
-            this.Controls.Add(this.txtStatus);
             this.Controls.Add(this.txtOrderID);
             this.Controls.Add(this.dgvOrders);
             this.Name = "frmOrder";
@@ -246,8 +249,6 @@
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.DataGridView dgvOrders;
         private System.Windows.Forms.TextBox txtOrderID;
-        private System.Windows.Forms.TextBox txtStatus;
-        private System.Windows.Forms.TextBox txtTableID;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDelete;
@@ -263,5 +264,7 @@
         private System.Windows.Forms.Label lblDateCheckOut;
         private System.Windows.Forms.DateTimePicker dtpDateCheckIn;
         private System.Windows.Forms.DateTimePicker dtpDateCheckOut;
+        private System.Windows.Forms.ComboBox cbbStatus;
+        private System.Windows.Forms.ComboBox cbbTableID;
     }
 }
